@@ -1,0 +1,26 @@
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <string id="AppName">garmin-mvg</string>
+
+    <string id="menu_main">Menu</string>
+    <string id="menu_nearby">Nearby</string>
+    <string id="menu_favorite">Favorite</string>
+    <string id="menu_settings">Settings</string>
+    <string id="menu_about">About</string>
+
+    <string id="nearby_title">Nearby</string>
+    <string id="nearby_searching">Searching...</string>
+    <string id="nearby_no_gps">No GPS signal</string>
+    <string id="nearby_network_error">Network error</string>
+    <string id="nearby_no_stations">No stations found</string>
+    <string id="nearby_too_large">Too many stations</string>
+
+    <string id="favorite_title">Favorites</string>
+    <string id="favorite_empty">No favorites yet</string>
+    
+    <string id="station_add_favorite">Add to Favorite</string>
+    <string id="station_remove_favorite">Remove Favorite</string>
+    <string id="station_departures">Departures</string>
+
+    <string id="departure_loading">Loading...</string>
+    <string id="departure_empty">No departures</string>
+</strings>
