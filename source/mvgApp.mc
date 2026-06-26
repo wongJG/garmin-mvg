@@ -16,7 +16,12 @@ class mvgApp extends Application.AppBase {
     function onStop(state as Dictionary?) as Void {
     }
 
-    // Return the initial view of your application here
+    // Return the glance view shown in the widget loop preview
+    function getGlanceView() as [WatchUi.GlanceView] or [WatchUi.GlanceView, WatchUi.GlanceViewDelegate] or Null {
+        return [ new mvgGlanceView() ];
+    }
+
+    // Return the initial view when the widget is opened (tapped)
     function getInitialView() as [Views] or [Views, InputDelegates] {
         var view = new mvgView();
         return [ view, new mvgDelegate(view) ];

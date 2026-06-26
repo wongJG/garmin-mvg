@@ -20,6 +20,9 @@ class mvgStationMenuDelegate extends WatchUi.BehaviorDelegate {
         var station = _menuView.getStation();
 
         if (index == 0) {
+            // Persist as last viewed station for the glance view
+            mvgLastStation.saveLastStation(station);
+
             // Push departure view for this station
             var globalId = station["globalId"] as String;
             var name = station["name"] as String;
