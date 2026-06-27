@@ -47,24 +47,25 @@ class mvgNearbyView extends WatchUi.View {
         _statusMessage = WatchUi.loadResource(Rez.Strings.nearby_searching) as String;
         WatchUi.requestUpdate();
 
-        // Get GPS position; fall back to Munich coordinates in simulator
-        var lat = 48.160000;
-        var lon = 11.530000;
-        var isFallback = true;
+        // Request a single GPS fix via location events (callback-driven) instead of
+        // the synchronous Position.getInfo(), which may return stale or null data.
+        Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
+    }
 
-        var info = Position.getInfo();
-        if (info != null && info.position != null) {
-            var deg = info.position.toDegrees();
-            var gpsLat = deg[0] as Float;
-            var gpsLon = deg[1] as Float;
+    // --- Position callback ---
 
-            lat = gpsLat;
-            lon = gpsLon;
-            isFallback = false;
+    function onPosition(info as Position.Info) as Void {
+        // If the one-shot quality is below usable, fall back to last known position
+        if (info == null || info.position == null || (info.accuracy != null && info.accuracy < Position.QUALITY_USABLE)) {
+            info = Position.getInfo();
         }
 
+        var deg = info.position.toDegrees();
+        var lat = deg[0] as Float;
+        var lon = deg[1] as Float;
+
         System.println("GPS: " + lat.format("%.6f") + ", " + lon.format("%.6f") +
-                       (isFallback ? " (fallback)" : ""));
+                       " q=" + (info.accuracy != null ? info.accuracy.toString() : "?"));
 
         // Build MVG API request
         var url = "https://www.mvg.de/api/bgw-pt/v3/stations/nearby" +
