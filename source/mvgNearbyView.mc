@@ -346,7 +346,7 @@ class mvgNearbyView extends WatchUi.View {
         if (type == null) { return Graphics.COLOR_LT_GRAY; }
         if (type.equals("UBAHN")) { return Graphics.COLOR_BLUE; }
         if (type.equals("TRAM"))  { return Graphics.COLOR_RED; }
-        if (type.equals("BUS"))   { return Graphics.COLOR_DK_BLUE; }
+        if (type.equals("BUS"))   { return Graphics.COLOR_DK_GREEN; }
         if (type.equals("SBAHN")) { return Graphics.COLOR_GREEN; }
         return Graphics.COLOR_LT_GRAY;
     }

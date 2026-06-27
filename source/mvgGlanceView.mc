@@ -132,7 +132,7 @@ class mvgGlanceView extends WatchUi.GlanceView {
         // Compact layout for glance view
         var margin = 4;
         var labelY = margin + 6;
-        var badgeY = labelY + 16;
+        var badgeY = labelY + 22;
 
         // --- Station name (top, centered, small) ---
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
@@ -260,9 +260,9 @@ class mvgGlanceView extends WatchUi.GlanceView {
     private function getTransportColor(type as String?) as Number {
         if (type == null) { return Graphics.COLOR_LT_GRAY; }
         if (type.equals("UBAHN")) { return Graphics.COLOR_BLUE; }
-        if (type.equals("TRAM"))  { return Graphics.COLOR_GREEN; }
-        if (type.equals("BUS"))   { return Graphics.COLOR_ORANGE; }
-        if (type.equals("SBAHN")) { return Graphics.COLOR_DK_GREEN; }
+        if (type.equals("TRAM"))  { return Graphics.COLOR_RED; }
+        if (type.equals("BUS"))   { return Graphics.COLOR_DK_GREEN; }
+        if (type.equals("SBAHN")) { return Graphics.COLOR_GREEN; }
         return Graphics.COLOR_LT_GRAY;
     }
 }
