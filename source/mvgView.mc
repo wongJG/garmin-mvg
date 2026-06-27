@@ -8,8 +8,8 @@ class mvgView extends WatchUi.View {
     private var _selectedIndex as Number = 0;
 
     private const MENU_ITEMS = [
-        WatchUi.loadResource(Rez.Strings.menu_nearby) as String,
         WatchUi.loadResource(Rez.Strings.menu_favorite) as String,
+        WatchUi.loadResource(Rez.Strings.menu_nearby) as String,
     ];
 
     private const ITEM_COUNT = 2;
@@ -96,9 +96,6 @@ class mvgView extends WatchUi.View {
             }
             // Simple icon: dot or arrow depending on item
             if (i == 0) {
-                // Crosshair / location dot for Nearby
-                dc.fillCircle(iconX, iconY, 4);
-            } else {
                 // Star shape for Favorite (simplified as a filled square)
                 dc.fillPolygon([
                     [iconX, iconY - 5],
@@ -110,6 +107,9 @@ class mvgView extends WatchUi.View {
                     [iconX - 5, iconY + 2],
                     [iconX - 4, iconY - 2],
                 ]);
+            } else {
+                // Crosshair / location dot for Nearby
+                dc.fillCircle(iconX, iconY, 4);
             }
 
             // Draw the label text

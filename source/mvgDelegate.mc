@@ -16,12 +16,12 @@ class mvgDelegate extends WatchUi.BehaviorDelegate {
         var selected = _view.getSelectedIndex();
 
         if (selected == 0) {
-            // Nearby selected
-            onNearbySelected();
-        } else if (selected == 1) {
             // Favorite selected
             onFavoriteSelected();
-            
+        } else if (selected == 1) {
+            // Nearby selected
+            onNearbySelected();
+
         }
 
         return true;
