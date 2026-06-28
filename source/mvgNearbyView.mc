@@ -24,6 +24,9 @@ class mvgNearbyView extends WatchUi.View {
     private var _stations as Array<Dictionary> = [];
     private var _selectedIndex as Number = 0;
     private var _topVisibleIndex as Number = 0;
+    private var _gpsUseEvent as Boolean = true;
+    private var _prompted as Boolean = false;
+    private var _gpsChosen as Boolean = false;
 
     function initialize() {
         View.initialize();
@@ -35,26 +38,49 @@ class mvgNearbyView extends WatchUi.View {
     }
 
     function onShow() as Void {
-        if (_stations.size() == 0 && _state == STATE_LOADING) {
-            loadStations();
+        if (_prompted) {
+            if (!_gpsChosen) {
+                // User backed out of GPS menu without choosing — pop this view
+                WatchUi.popView(WatchUi.SLIDE_DOWN);
+            }
+            return;
         }
+        _prompted = true;
+
+        var gpsView = new mvgNearbyGpsView(self);
+        WatchUi.pushView(gpsView, new mvgNearbyGpsDelegate(gpsView), WatchUi.SLIDE_IMMEDIATE);
     }
 
-    // --- GPS + API (called from onShow) ---
+    // Called by the menu delegate after user selects an option
+    function startLoading(gpsUseEvent as Boolean) as Void {
+        _gpsChosen = true;
+        _gpsUseEvent = gpsUseEvent;
+        loadStations();
+    }
+
+    // --- GPS + API ---
 
     function loadStations() as Void {
         _state = STATE_LOADING;
         _statusMessage = WatchUi.loadResource(Rez.Strings.nearby_searching) as String;
         WatchUi.requestUpdate();
 
-        // Request a single GPS fix via location events (callback-driven) instead of
-        // the synchronous Position.getInfo(), which may return stale or null data.
-        Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
+        if (_gpsUseEvent) {
+            // Use a one-shot GPS event to get a fresh fix
+            Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
+        } else {
+            // Use whatever position is available right now
+            processPosition(Position.getInfo());
+        }
     }
 
     // --- Position callback ---
 
     function onPosition(info as Position.Info) as Void {
+        processPosition(info);
+    }
+
+    function processPosition(info as Position.Info) as Void {
         // If the one-shot quality is below usable, fall back to last known position
         if (info == null || info.position == null || (info.accuracy != null && info.accuracy < Position.QUALITY_USABLE)) {
             info = Position.getInfo();

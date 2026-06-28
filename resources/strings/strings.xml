@@ -9,6 +9,8 @@
 
     <string id="nearby_title">Nearby</string>
     <string id="nearby_searching">Searching...</string>
+    <string id="nearby_gps_refresh">Refresh GPS</string>
+    <string id="nearby_gps_last">Use last known</string>
     <string id="nearby_no_gps">No GPS signal</string>
     <string id="nearby_network_error">Network error</string>
     <string id="nearby_no_stations">No stations found</string>
