@@ -188,7 +188,7 @@ class mvgFavoriteView extends WatchUi.View {
         }
         dc.drawText(
             10, y + (ITEM_HEIGHT / 2),
-            Graphics.FONT_SMALL,
+            Graphics.FONT_TINY,
             displayName,
             Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER
         );

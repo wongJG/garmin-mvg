@@ -258,7 +258,7 @@ class mvgNearbyView extends WatchUi.View {
         var nameText = station["name"] as String;
         var badgeCount = types != null ? types.size() : 0;
         var rightMargin = 5;
-        var distWidth = 45; // ~width of "328m" in FONT_SMALL
+        var distWidth = 45;
         var distX = width - rightMargin;
         var distY = y + (ITEM_HEIGHT / 2);
 
@@ -270,7 +270,7 @@ class mvgNearbyView extends WatchUi.View {
         }
         dc.drawText(
             distX, distY,
-            Graphics.FONT_SMALL,
+            Graphics.FONT_TINY,
             distText,
             Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER
         );
@@ -309,7 +309,6 @@ class mvgNearbyView extends WatchUi.View {
 
         // --- Station name (left-aligned, truncated if too long) ---
         // Estimate available width before badges/distance, then clip to fit.
-        // FONT_SMALL ≈ 8px per char; use 9px to be safe.
         var nameMaxWidth = badgeStartX - 55;
         var maxChars = (nameMaxWidth / 9).toNumber();
         var displayName = nameText;
@@ -323,7 +322,7 @@ class mvgNearbyView extends WatchUi.View {
         }
         dc.drawText(
             10, y + (ITEM_HEIGHT / 2),
-            Graphics.FONT_SMALL,
+            Graphics.FONT_TINY,
             displayName,
             Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER
         );

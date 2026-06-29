@@ -216,7 +216,7 @@ class mvgDepartureView extends WatchUi.View {
         var hasDelay = !cancelled && delayMin != null && delayMin > 0;
 
         // --- Line badge (colored by transport type, variable width for "N17" etc.) ---
-        var badgeW = label != null ? label.length() * 6 + 8 : 16;
+        var badgeW = label != null ? label.length() * 8 + 8 : 16;
         if (badgeW < 22) { badgeW = 22; }
         var badgeH = 16;
         var badgeX = 10;
@@ -287,7 +287,7 @@ class mvgDepartureView extends WatchUi.View {
         var displayDest = truncateText(destination, destMaxW);
         dc.drawText(
             destX, rowCenter,
-            Graphics.FONT_SMALL,
+            Graphics.FONT_TINY,
             displayDest,
             Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER
         );
@@ -305,7 +305,7 @@ class mvgDepartureView extends WatchUi.View {
         }
         dc.drawText(
             timeX, rowCenter,
-            Graphics.FONT_SMALL,
+            Graphics.FONT_TINY,
             timeText,
             Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER
         );
