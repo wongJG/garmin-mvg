@@ -4,6 +4,7 @@ import Toybox.Lang;
 import Toybox.System;
 import Toybox.Time;
 import Toybox.Time.Gregorian;
+import Toybox.Timer;
 import Toybox.WatchUi;
 
 class mvgDepartureView extends WatchUi.View {
@@ -25,6 +26,7 @@ class mvgDepartureView extends WatchUi.View {
     private var _departures as Array<Dictionary> = [];
     private var _selectedIndex as Number = 0;
     private var _topVisibleIndex as Number = 0;
+    private var _timer as Timer.Timer?;
 
     function initialize(globalId as String, stationName as String) {
         View.initialize();
@@ -39,6 +41,20 @@ class mvgDepartureView extends WatchUi.View {
         if (_departures.size() == 0 && _state == STATE_LOADING) {
             loadDepartures();
         }
+        if (_timer == null) {
+            _timer = new Timer.Timer();
+        }
+        _timer.start(method(:onTimerTick), 60000, true);
+    }
+
+    function onHide() as Void {
+        if (_timer != null) {
+            _timer.stop();
+        }
+    }
+
+    function onTimerTick() as Void {
+        loadDepartures();
     }
 
     // --- API ---
